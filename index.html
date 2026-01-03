@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Le premier syndicat de freelances d'élite en France. 0% commission • Missions sous 7j • +30% revenus garantis">
+    <meta property="og:title" content="MIRA Collective - Brillez, ensemble">
+    <meta property="og:description" content="Le premier syndicat de freelances d'élite. 0% commission à vie pour les 100 fondateurs.">
+    <meta property="og:type" content="website">
+    <title>MIRA Collective - Brillez, ensemble | Le syndicat de freelances d'élite</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <svg width="120" height="40" viewBox="0 0 120 40" fill="none">
+                        <text x="10" y="30" font-family="Inter" font-weight="800" font-size="24" fill="#0A1E5E">MIRA</text>
+                    </svg>
+                </div>
+                <div class="nav-links">
+                    <a href="#freelances">Freelances</a>
+                    <a href="#entreprises">Entreprises</a>
+                </div>
+                <button class="btn btn-primary btn-nav">Devenir fondateur</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- SECTION 1: HERO -->
+    <section class="hero" id="hero">
+        <div class="stars-background"></div>
+        <div class="container">
+            <h1 class="hero-title">Brillez, ensemble.</h1>
+            <p class="hero-subtitle">
+                Le premier syndicat de freelances d'élite en France.<br>
+                <span class="highlight">0% commission • Missions sous 7 jours • +30% de revenus garantis</span>
+            </p>
+
+            <div class="hero-ctas">
+                <button class="btn btn-primary btn-large" onclick="scrollToForm()">
+                    Rejoindre les 100 fondateurs →
+                </button>
+                <button class="btn btn-ghost btn-large" onclick="scrollToSection('how-it-works')">
+                    Voir comment ça marche
+                </button>
+            </div>
+
+            <div class="urgency-badge">
+                <span class="star-icon">⭐</span>
+                <span id="places-remaining">53</span>/100 places restantes
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+            </div>
+
+            <div class="micro-copy">
+                Rejoignez Sarah, Thomas et <span id="other-count">45</span> autres experts
+            </div>
+
+            <div class="avatars-scroll">
+                <div class="avatars-container" id="avatars-container">
+                    <div class="avatar" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)">SM</div>
+                    <div class="avatar" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%)">TL</div>
+                    <div class="avatar" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)">JK</div>
+                    <div class="avatar" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)">MC</div>
+                    <div class="avatar" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%)">AL</div>
+                    <div class="avatar" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%)">RB</div>
+                    <div class="avatar" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)">NG</div>
+                    <div class="avatar" style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)">PD</div>
+                </div>
+            </div>
+
+            <div class="hero-image">
+                <div class="hero-placeholder">
+                    <div class="collab-illustration">
+                        <div class="collab-circle" style="left: 20%; top: 30%;">👨‍💻</div>
+                        <div class="collab-circle" style="right: 20%; top: 25%;">👩‍🎨</div>
+                        <div class="collab-circle" style="left: 35%; bottom: 20%;">👨‍💼</div>
+                        <div class="collab-circle" style="right: 30%; bottom: 25%;">👩‍💻</div>
+                        <div class="connecting-line line-1"></div>
+                        <div class="connecting-line line-2"></div>
+                        <div class="connecting-line line-3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: LE PROBLÈME -->
+    <section class="problem-section" id="problem">
+        <div class="container">
+            <div class="eyebrow">LE FREELANCING ACTUEL</div>
+            <h2>Vous méritez mieux que le statut quo</h2>
+
+            <div class="problems-grid">
+                <div class="problem-card">
+                    <div class="problem-icon">💸</div>
+                    <h3>15-20% de commission prélevée</h3>
+                    <p>Malt, Comet et autres prennent jusqu'à 20% de vos revenus. Sur un TJM de 500€, c'est 100€/jour envolés. 20 jours = <strong>2000€ perdus chaque mois</strong>.</p>
+                </div>
+
+                <div class="problem-card">
+                    <div class="problem-icon">⏰</div>
+                    <h3>Délais de paiement interminables</h3>
+                    <p>30, 45, parfois 60 jours avant de toucher votre argent. Pendant ce temps, vos charges tombent. Résultat : <strong>stress et trésorerie tendue</strong>.</p>
+                </div>
+
+                <div class="problem-card">
+                    <div class="problem-icon">😰</div>
+                    <h3>Seul(e) face aux risques</h3>
+                    <p>Impayés, trous entre missions, maladie, litiges clients : vous gérez tout seul(e) sans filet de sécurité. <strong>L'angoisse permanente</strong>.</p>
+                </div>
+            </div>
+
+            <div class="testimonial-quote">
+                <div class="quote-mark">"</div>
+                <p class="quote-text">J'ai perdu 12 000€ de commission l'année dernière sur des plateformes classiques. Sans parler des 3 mois d'attente pour un impayé.</p>
+                <p class="quote-author">— Marc D., Développeur Full-Stack freelance depuis 5 ans</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: LA SOLUTION -->
+    <section class="solution-section" id="solution">
+        <div class="container">
+            <div class="eyebrow">MIRA COLLECTIVE</div>
+            <h2>Imaginez un monde où vous gardez 100% de vos revenus</h2>
+            <p class="section-subtitle">Nous avons construit la plateforme que nous aurions rêvé d'avoir en tant que freelances.</p>
+
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">⭐</div>
+                    <h3>0% de commission à vie</h3>
+                    <p>Oui, vous avez bien lu. ZÉRO pour cent. Pas de frais cachés, pas d'astérisque. Vous facturez 500€/jour ? Vous touchez 500€/jour. Point.</p>
+                    <div class="benefit-stat">Économie sur 1 an : 24 000€ (vs 15% ailleurs)</div>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">💰</div>
+                    <h3>+30% de revenus garantis en 90 jours</h3>
+                    <p>Notre coach dédié vous aide à repositionner votre offre, affûter votre pitch et négocier comme un pro. Si on n'atteint pas +30%, on travaille gratuitement jusqu'à y arriver.</p>
+                    <div class="benefit-stat">De 400€ à 520€/jour = +28 800€/an</div>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">⚡</div>
+                    <h3>Paiement sous 48h garanti</h3>
+                    <p>Fini l'attente. Mission terminée le lundi ? Argent sur votre compte le mercredi. Nous payons, puis nous encaissons le client. Votre trésorerie, notre problème.</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">🛡️</div>
+                    <h3>Protection anti-impayés 100%</h3>
+                    <p>Si un client ne paie pas, on vous paie quand même. Notre fonds de garantie couvre tous les impayés. Vous dormez tranquille.</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">🎓</div>
+                    <h3>Académie MIRA - Formation continue</h3>
+                    <p>Parcours de 12 semaines : positionnement, vente, négociation, productivité. + Masterclass hebdomadaires avec freelances à 1M€+/an.</p>
+                    <div class="benefit-stat">Valeur : 990€, gratuit pour membres actifs</div>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">🤝</div>
+                    <h3>Communauté d'élite exclusive</h3>
+                    <p>Discord privé, events mensuels dans 5 villes, networking avec pairs de votre niveau. Collaborations, recommandations, entraide. Le collectif, pour de vrai.</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">📈</div>
+                    <h3>Score APEX - Gamification</h3>
+                    <p>Système de points (0-1000) basé sur vos compétences, reviews, missions réussies. Débloquez des avantages par paliers. Top 100 visible publiquement. Badge LinkedIn "Apex Verified".</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">🏆</div>
+                    <h3>Accès missions VIP (800€+ TJM)</h3>
+                    <p>Les meilleurs clients réservent leurs projets premium pour les membres MIRA. Missions exclusives non publiées ailleurs. Deal flow prioritaire.</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">💎</div>
+                    <h3>Cashback 2% annuel</h3>
+                    <p>2% de chaque mission reversé dans un pot commun. Redistribué en fin d'année. Plus vous travaillez, plus vous récupérez.</p>
+                    <div class="benefit-stat">Exemple : 100k€ facturés = 2000€ de bonus</div>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">⚖️</div>
+                    <h3>Pouvoir de négociation collectif</h3>
+                    <p>Assurance RC Pro -40%, Mutuelle -30%, Outils SaaS -50%, Expert-comptable 99€/mois. La force du nombre pour de vraies économies.</p>
+                    <div class="benefit-stat">Économie totale : ~3000€/an</div>
+                </div>
+            </div>
+
+            <div class="cta-box">
+                <h3>Prêt(e) à rejoindre l'élite ?</h3>
+                <p>Les 100 fondateurs bénéficient d'avantages à vie.</p>
+                <button class="btn btn-primary btn-large" onclick="scrollToForm()">Devenir fondateur →</button>
+                <p class="micro-copy">Sans engagement • Inscription 2 minutes</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: PROGRAMME FONDATEURS -->
+    <section class="founders-section" id="founders">
+        <div class="container">
+            <div class="badge-gold">🏆 PROGRAMME FONDATEURS</div>
+            <h2>Faites partie de l'histoire</h2>
+            <p class="section-intro">Les 100 premiers membres ne sont pas juste des utilisateurs : ils sont co-créateurs de MIRA. Ensemble, nous bâtissons le syndicat de freelances le plus puissant de France.</p>
+
+            <div class="founders-box">
+                <h3>En tant que Fondateur MIRA, vous obtenez :</h3>
+
+                <div class="founders-benefits">
+                    <div class="founder-benefit">
+                        <span class="check">✓</span>
+                        <div>
+                            <strong>0% commission À VIE</strong>
+                            <p>Tous les autres paieront 3% après 6 mois gratuits. Vous ? Jamais. Économie : 24 000€+ sur une carrière.</p>
+                        </div>
+                    </div>
+
+                    <div class="founder-benefit">
+                        <span class="check">✓</span>
+                        <div>
+                            <strong>0.05% d'equity dans la société</strong>
+                            <p>Vous ne rejoignez pas une plateforme, vous devenez actionnaire. Quand MIRA vaut 100M€, vos parts valent 50 000€.</p>
+                        </div>
+                    </div>
+
+                    <div class="founder-benefit">
+                        <span class="check">✓</span>
+                        <div>
+                            <strong>Badge "Founding Member" ultra-prestigieux</strong>
+                            <p>Sur votre profil, LinkedIn, partout. Signal fort de votre leadership et vision avant-gardiste.</p>
+                        </div>
+                    </div>
+
+                    <div class="founder-benefit">
+                        <span class="check">✓</span>
+                        <div>
+                            <strong>Droit de vote trimestriel</strong>
+                            <p>Vous décidez des orientations produit : quelles features développer, quels partenariats, quelle stratégie. Votre voix compte.</p>
+                        </div>
+                    </div>
+
+                    <div class="founder-benefit">
+                        <span class="check">✓</span>
+                        <div>
+                            <strong>Early access à vie</strong>
+                            <p>Chaque nouvelle feature, vous l'avez en premier. Beta-testeur VIP permanent.</p>
+                        </div>
+                    </div>
+
+                    <div class="founder-benefit">
+                        <span class="check">✓</span>
+                        <div>
+                            <strong>Bonus parrainage fondateur : 500€</strong>
+                            <p>Pour chaque fondateur que vous amenez (validé et actif). Amenez 10 profils d'élite = 5000€.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="value-box">
+                    <h4>Valeur totale :</h4>
+                    <ul>
+                        <li>Commission économisée : 24k€/an</li>
+                        <li>Equity potentielle : 50k€</li>
+                        <li>Formation offerte : 990€</li>
+                        <li>Partenariats : 3k€/an</li>
+                    </ul>
+                    <div class="total-value">= 78 000€+ de valeur</div>
+                </div>
+
+                <div class="urgency-counter">
+                    <div class="counter-label">⏰ Plus que <span id="places-remaining-2" class="big-number">53</span> places disponibles sur 100</div>
+                    <div class="progress-bar progress-bar-large">
+                        <div class="progress-fill" id="progress-fill-2"></div>
+                    </div>
+                    <p class="counter-note">À ce rythme (7 inscriptions/jour), programme complet dans 8 jours.</p>
+                </div>
+
+                <div class="social-proof-founders">
+                    <h4>Ils ont déjà rejoint :</h4>
+                    <div class="founders-carousel">
+                        <div class="founder-mini">
+                            <div class="avatar avatar-large" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)">SM</div>
+                            <div class="founder-info">
+                                <strong>Sarah M.</strong>
+                                <span>UI/UX Designer • Ex-Figma</span>
+                            </div>
+                        </div>
+                        <div class="founder-mini">
+                            <div class="avatar avatar-large" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%)">TL</div>
+                            <div class="founder-info">
+                                <strong>Thomas L.</strong>
+                                <span>Dev Full-Stack • Ex-Doctolib</span>
+                            </div>
+                        </div>
+                        <div class="founder-mini">
+                            <div class="avatar avatar-large" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)">JK</div>
+                            <div class="founder-info">
+                                <strong>Julie K.</strong>
+                                <span>Product Manager • Ex-Blablacar</span>
+                            </div>
+                        </div>
+                        <div class="founder-more">
+                            <div class="avatar avatar-large" style="background: #2D3436; color: #B87333;">+44</div>
+                            <div class="founder-info">
+                                <strong>autres experts</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary btn-xxl pulse" onclick="scrollToForm()">Je deviens fondateur →</button>
+
+                <div class="reassurance">
+                    <span>⚡ Validation de votre profil en moins de 24h</span>
+                    <span>🔒 Aucune carte bancaire requise</span>
+                    <span>✅ Sans engagement - Gratuit à vie pour fondateurs</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: COMMENT ÇA MARCHE -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <h2>Rejoindre MIRA en 3 étapes</h2>
+
+            <div class="timeline">
+                <div class="timeline-step">
+                    <div class="step-number">1️⃣</div>
+                    <h3>Inscription</h3>
+                    <div class="step-duration">2 minutes</div>
+                    <ul>
+                        <li>📝 Remplissez le formulaire : nom, expertise, TJM actuel, portfolio</li>
+                        <li>🎯 Indiquez vos ambitions (TJM cible, type de missions)</li>
+                        <li>✉️ Recevez email de confirmation instantané</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-connector"></div>
+
+                <div class="timeline-step">
+                    <div class="step-number">2️⃣</div>
+                    <h3>Validation</h3>
+                    <div class="step-duration">24 heures</div>
+                    <ul>
+                        <li>👤 Appel de 15min avec notre équipe</li>
+                        <li>🔍 Vérification de votre profil et expérience</li>
+                        <li>✅ Validation = accès immédiat à la communauté + Discord</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-connector"></div>
+
+                <div class="timeline-step">
+                    <div class="step-number">3️⃣</div>
+                    <h3>Première mission</h3>
+                    <div class="step-duration">sous 7 jours</div>
+                    <ul>
+                        <li>🎯 Notre équipe vous matche avec missions qui correspondent</li>
+                        <li>💬 Vous choisissez celle qui vous plaît</li>
+                        <li>🚀 Mission démarrée = paiement sous 48h après livraison</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="guarantee-box">
+                <strong>Garantie :</strong> Si pas de mission sous 30 jours, on vous rembourse 100€ + on travaille gratuitement jusqu'à ce que vous en ayez une.
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6: TÉMOIGNAGES -->
+    <section class="testimonials-section" id="testimonials">
+        <div class="container">
+            <h2>Ce qu'en disent les premiers fondateurs</h2>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"J'ai augmenté mon TJM de 400€ à 550€ en 2 mois grâce au coaching MIRA. Et surtout, je ne paie plus 15% de commission. J'ai économisé 18k€ cette année."</p>
+                    <div class="testimonial-author">
+                        <div class="avatar avatar-large" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)">SM</div>
+                        <div>
+                            <strong>Sarah Martinez</strong>
+                            <span>UI/UX Designer • Ex-Figma • Membre depuis 3 mois</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"La communauté est incroyable. J'ai trouvé 2 collaborateurs pour un gros projet, on s'entraide sur les négociations. C'est ça, le vrai collectif."</p>
+                    <div class="testimonial-author">
+                        <div class="avatar avatar-large" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%)">TL</div>
+                        <div>
+                            <strong>Thomas Leroux</strong>
+                            <span>Développeur Full-Stack • Ex-Doctolib • Membre depuis 2 mois</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"Première mission trouvée en 5 jours. Payée en 48h. Enfin une plateforme qui ne me prend pas pour une vache à lait."</p>
+                    <div class="testimonial-author">
+                        <div class="avatar avatar-large" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)">JK</div>
+                        <div>
+                            <strong>Julie Kim</strong>
+                            <span>Product Manager • Ex-Blablacar • Membre depuis 1 mois</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-number">3000+</div>
+                    <div class="metric-label">missions complétées par nos membres</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number">520€</div>
+                    <div class="metric-label">TJM moyen vs 380€ sur autres plateformes</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number">48h</div>
+                    <div class="metric-label">de paiement vs 45 jours ailleurs</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number">98%</div>
+                    <div class="metric-label">satisfaction - membres actifs recommandent</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 7: FAQ -->
+    <section class="faq-section" id="faq">
+        <div class="container">
+            <h2>Questions fréquentes</h2>
+
+            <div class="faq-accordion">
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>C'est gratuit, vraiment ? Où est l'arnaque ?</span>
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Oui, vraiment 0% de commission pour les fondateurs. Notre modèle : nous facturons les entreprises qui accèdent à notre base de talents (499€/mois) + services complémentaires (formations, portage). Vous, vous ne payez rien.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>Quels sont les critères pour devenir fondateur ?</span>
+                        <span class="faq-icon">▶</span>
+                    </button>
+                    <div class="faq-answer">
+                        <ul>
+                            <li>Minimum 3 ans d'expérience en freelance (ou équivalent en CDI avant)</li>
+                            <li>TJM actuel de 300€ minimum</li>
+                            <li>Portfolio / références vérifiables</li>
+                            <li>Expertise recherchée : Dev, Design, Product, Data, Marketing</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>Je suis déjà sur Malt/Comet, pourquoi changer ?</span>
+                        <span class="faq-icon">▶</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Vous ne changez pas, vous AJOUTEZ MIRA. Beaucoup de nos membres cumulent. Différence : chez nous 0% commission, paiement 48h, communauté active. Aucune exclusivité demandée.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>Comment vous garantissez les paiements en 48h ?</span>
+                        <span class="faq-icon">▶</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Nous avons un fonds de trésorerie dédié. Nous vous payons dès validation de la mission, puis nous encaissons le client. Si impayé client, on assume le risque, pas vous.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>C'est quoi le piège si c'est 0% commission ?</span>
+                        <span class="faq-icon">▶</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Il n'y en a pas. Les fondateurs ont 0% à vie, point. Les membres qui rejoindront après les 100 premiers paieront 3% (toujours moins cher que le marché). C'est notre façon de récompenser les early adopters.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>Combien de missions je peux espérer ?</span>
+                        <span class="faq-icon">▶</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Dépend de votre profil et disponibilité. Moyenne actuelle : 2-3 opportunités qualifiées/semaine. Vous choisissez celles qui vous intéressent. Objectif : taux de remplissage de 95% (vs 60% marché).</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>Vous prenez combien de temps pour valider mon profil ?</span>
+                        <span class="faq-icon">▶</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Maximum 24h ouvrées. Généralement 3-4h. Appel de 15min pour faire connaissance + vérification références. Si validé, accès immédiat.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>Je peux parrainer d'autres freelances ?</span>
+                        <span class="faq-icon">▶</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Absolument ! Bonus de 500€ par fondateur que vous amenez (validé + actif). Si vous connaissez 5-10 excellents profils, amenez-les, tout le monde gagne.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 8: CTA FINAL -->
+    <section class="final-cta" id="final-cta">
+        <div class="stars-background"></div>
+        <div class="container">
+            <h2>Prêt(e) à changer de dimension ?</h2>
+            <p class="final-subtitle">
+                Les 100 places fondateurs partent vite. Dans 3 mois, vous regretterez de ne pas avoir sauté sur l'occasion. <br>
+                Dans 3 ans, vous serez fier(e) de l'avoir fait.
+            </p>
+
+            <div class="final-counter">
+                <div class="counter-big">
+                    <span id="places-remaining-3" class="number-big">53</span>
+                    <span class="separator">/</span>
+                    <span class="total">100</span>
+                </div>
+                <div class="counter-label-big">places fondateurs restantes</div>
+            </div>
+
+            <button class="btn btn-primary btn-xxl pulse" onclick="scrollToForm()">Je deviens fondateur MIRA →</button>
+
+            <div class="final-reassurance">
+                <span>✓ Sans carte bancaire</span>
+                <span>✓ Sans engagement</span>
+                <span>✓ Validation en 24h max</span>
+                <span>✓ Accès Discord immédiat</span>
+            </div>
+
+            <div class="final-social-proof">
+                <div class="avatars-overlap">
+                    <div class="avatar" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)">SM</div>
+                    <div class="avatar" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%)">TL</div>
+                    <div class="avatar" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)">JK</div>
+                    <div class="avatar" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)">MC</div>
+                    <div class="avatar" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%)">AL</div>
+                    <div class="avatar" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%)">RB</div>
+                    <div class="avatar" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)">NG</div>
+                    <div class="avatar" style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)">PD</div>
+                    <div class="avatar" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)">+36</div>
+                </div>
+                <p><strong>Thomas, Sarah, Julie et 44 autres experts</strong><br>vous attendent déjà sur le Discord des fondateurs</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FORMULAIRE D'INSCRIPTION -->
+    <section class="form-section" id="form">
+        <div class="container">
+            <div class="form-wrapper">
+                <div class="form-header">
+                    <h2>Devenir Membre Fondateur</h2>
+                    <p>Remplissez ce formulaire en 2 minutes pour rejoindre l'élite</p>
+                </div>
+
+                <form id="founder-form" class="founder-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">Prénom *</label>
+                            <input type="text" id="firstName" name="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Nom *</label>
+                            <input type="text" id="lastName" name="lastName" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email professionnel *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Téléphone *</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="expertise">Expertise principale *</label>
+                            <select id="expertise" name="expertise" required>
+                                <option value="">Sélectionnez...</option>
+                                <option value="dev">Développement</option>
+                                <option value="design">Design UI/UX</option>
+                                <option value="product">Product Management</option>
+                                <option value="data">Data/Analytics</option>
+                                <option value="marketing">Marketing Digital</option>
+                                <option value="other">Autre</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="experience">Années d'expérience *</label>
+                            <select id="experience" name="experience" required>
+                                <option value="">Sélectionnez...</option>
+                                <option value="3-5">3-5 ans</option>
+                                <option value="5-10">5-10 ans</option>
+                                <option value="10+">10+ ans</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="currentTJM">TJM actuel (€) *</label>
+                            <input type="number" id="currentTJM" name="currentTJM" min="300" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="targetTJM">TJM cible (€) *</label>
+                            <input type="number" id="targetTJM" name="targetTJM" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="portfolio">Lien Portfolio / LinkedIn *</label>
+                        <input type="url" id="portfolio" name="portfolio" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="motivation">Pourquoi voulez-vous rejoindre MIRA ? (optionnel)</label>
+                        <textarea id="motivation" name="motivation" rows="4"></textarea>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <label>
+                            <input type="checkbox" name="gdpr" required>
+                            <span>J'accepte la politique de confidentialité et le traitement de mes données *</span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-large btn-full">
+                        Valider ma candidature →
+                    </button>
+
+                    <p class="form-note">⚡ Vous recevrez un email de confirmation dans les 5 minutes</p>
+                </form>
+
+                <div id="form-success" class="form-success" style="display: none;">
+                    <div class="success-icon">✓</div>
+                    <h3>Félicitations ! 🎉</h3>
+                    <p>Votre candidature a bien été reçue. Nous allons étudier votre profil et vous contacter dans les 24h.</p>
+                    <p>En attendant, rejoignez notre Discord pour rencontrer les autres fondateurs !</p>
+                    <button class="btn btn-primary" onclick="window.open('https://discord.gg/mira', '_blank')">Rejoindre le Discord</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <svg width="120" height="40" viewBox="0 0 120 40" fill="none">
+                        <text x="10" y="30" font-family="Inter" font-weight="800" font-size="24" fill="#FFFFFF">MIRA</text>
+                    </svg>
+                    <p>Le syndicat de freelances d'élite</p>
+                    <p class="tagline">Brillez, ensemble.</p>
+                </div>
+
+                <div class="footer-links">
+                    <div class="footer-col">
+                        <h4>Produit</h4>
+                        <a href="#freelances">Freelances</a>
+                        <a href="#entreprises">Entreprises</a>
+                        <a href="#tarifs">Tarifs</a>
+                        <a href="#roadmap">Roadmap</a>
+                    </div>
+
+                    <div class="footer-col">
+                        <h4>Ressources</h4>
+                        <a href="#blog">Blog</a>
+                        <a href="#faq">FAQ</a>
+                        <a href="#academie">Académie</a>
+                        <a href="#success-stories">Success Stories</a>
+                    </div>
+
+                    <div class="footer-col">
+                        <h4>Légal</h4>
+                        <a href="#cgu">CGU</a>
+                        <a href="#confidentialite">Confidentialité</a>
+                        <a href="#mentions">Mentions légales</a>
+                        <a href="#contact">Contact</a>
+                    </div>
+
+                    <div class="footer-col">
+                        <h4>Social</h4>
+                        <a href="https://linkedin.com/company/mira-collective" target="_blank">LinkedIn</a>
+                        <a href="https://twitter.com/miracollective" target="_blank">Twitter</a>
+                        <a href="https://instagram.com/miracollective" target="_blank">Instagram</a>
+                        <a href="https://discord.gg/mira" target="_blank">Discord</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2025 MIRA Collective SAS • Made with ❤️ in France</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
