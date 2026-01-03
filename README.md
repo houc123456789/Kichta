@@ -77,7 +77,34 @@ Convertir 15% des visiteurs en inscriptions au programme fondateurs.
 - **Tablet** (< 968px): Grilles adaptées, navigation simplifiée
 - **Mobile** (< 640px): Stack vertical, typo réduite
 
-## 🚀 Mise en ligne
+## 🚀 Déploiement
+
+### 🎯 Guide Complet Vercel
+
+**👉 Voir [DEPLOY.md](DEPLOY.md) pour le guide complet de déploiement sur Vercel**
+
+Le guide contient:
+- 3 méthodes de déploiement (Interface web, CLI, CI/CD)
+- Configuration domaine personnalisé
+- Analytics et monitoring
+- Troubleshooting
+- Optimisations performance
+
+### ⚡ Déploiement Rapide (CLI)
+
+```bash
+# Installer Vercel CLI
+npm install -g vercel
+
+# Déployer en production
+vercel --prod
+```
+
+**Ou via interface web:**
+1. Allez sur [vercel.com](https://vercel.com)
+2. Importez le repo GitHub
+3. Cliquez sur "Deploy"
+4. ✅ En ligne en 30 secondes !
 
 ### Checklist avant production
 
@@ -91,37 +118,8 @@ Convertir 15% des visiteurs en inscriptions au programme fondateurs.
 - [ ] Tester responsive sur vrais devices
 - [ ] Optimiser images (WebP, lazy loading)
 - [ ] Ajouter meta tags Open Graph pour réseaux sociaux
-- [ ] Configurer SSL/HTTPS
-- [ ] Tester vitesse (objectif < 2s)
+- [ ] Tester vitesse (objectif < 2s avec PageSpeed)
 - [ ] SEO: sitemap.xml, robots.txt
-
-### Déploiement rapide
-
-#### Option 1: Netlify (Recommandé)
-
-```bash
-# Installer Netlify CLI
-npm install -g netlify-cli
-
-# Déployer
-netlify deploy --prod
-```
-
-#### Option 2: Vercel
-
-```bash
-# Installer Vercel CLI
-npm install -g vercel
-
-# Déployer
-vercel --prod
-```
-
-#### Option 3: GitHub Pages
-
-1. Push sur GitHub
-2. Settings → Pages → Source: main branch
-3. URL: `https://username.github.io/repository`
 
 ## 🔧 Configuration Backend
 

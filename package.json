@@ -1,0 +1,18 @@
+{
+  "name": "mira-collective-landing",
+  "version": "1.0.0",
+  "description": "Landing page pour le recrutement des 100 membres fondateurs de MIRA Collective",
+  "main": "index.html",
+  "scripts": {
+    "dev": "python3 -m http.server 8000",
+    "build": "echo 'Static site - no build needed'"
+  },
+  "keywords": [
+    "landing-page",
+    "freelance",
+    "mira-collective"
+  ],
+  "author": "MIRA Collective",
+  "license": "UNLICENSED",
+  "private": true
+}

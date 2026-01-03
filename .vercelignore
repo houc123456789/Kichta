@@ -1,0 +1,9 @@
+# Git
+.git
+.gitignore
+
+# Documentation
+README.md
+
+# Vercel
+.vercel
