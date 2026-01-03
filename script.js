@@ -2,7 +2,7 @@
 // GLOBAL STATE
 // ===========================
 
-let placesRemaining = 53; // Starting with 53 places remaining out of 100
+let placesRemaining = 53;
 const TOTAL_PLACES = 100;
 
 // ===========================
@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeScrollAnimations();
     initializeForm();
     initializeTracking();
+    initializeParallax();
     simulatePlacesUpdate();
 });
 
@@ -29,7 +30,6 @@ function updatePlacesRemaining(places) {
     placesRemaining = places;
     const percentageFilled = ((TOTAL_PLACES - placesRemaining) / TOTAL_PLACES) * 100;
 
-    // Update all counter displays
     const counters = [
         'places-remaining',
         'places-remaining-2',
@@ -39,11 +39,10 @@ function updatePlacesRemaining(places) {
     counters.forEach(id => {
         const element = document.getElementById(id);
         if (element) {
-            animateNumber(element, parseInt(element.textContent) || TOTAL_PLACES - 47, places);
+            animateNumber(element, parseInt(element.textContent) || TOTAL_PLACES - 47, places, 1500);
         }
     });
 
-    // Update progress bars
     const progressBars = [
         'progress-fill',
         'progress-fill-2'
@@ -56,23 +55,21 @@ function updatePlacesRemaining(places) {
         }
     });
 
-    // Update "other count" (total signed up minus named ones)
-    const otherCount = TOTAL_PLACES - placesRemaining - 3; // Minus Sarah, Thomas, Julie
+    const otherCount = TOTAL_PLACES - placesRemaining - 3;
     const otherElement = document.getElementById('other-count');
     if (otherElement) {
         otherElement.textContent = otherCount;
     }
 }
 
-function animateNumber(element, start, end) {
-    const duration = 1000;
+function animateNumber(element, start, end, duration = 1500) {
     const startTime = performance.now();
 
     function update(currentTime) {
         const elapsed = currentTime - startTime;
         const progress = Math.min(elapsed / duration, 1);
 
-        const current = Math.floor(start + (end - start) * easeOutQuad(progress));
+        const current = Math.floor(start + (end - start) * easeOutCubic(progress));
         element.textContent = current;
 
         if (progress < 1) {
@@ -83,19 +80,32 @@ function animateNumber(element, start, end) {
     requestAnimationFrame(update);
 }
 
-function easeOutQuad(t) {
-    return t * (2 - t);
+function easeOutCubic(t) {
+    return 1 - Math.pow(1 - t, 3);
 }
 
-// Simulate places being taken (for demo purposes)
 function simulatePlacesUpdate() {
-    // Simulate a new signup every 3 hours (10800000 ms)
-    // For demo, we'll do it every 30 seconds
     setInterval(() => {
         if (placesRemaining > 0) {
             updatePlacesRemaining(placesRemaining - 1);
         }
-    }, 30000); // 30 seconds for demo (change to 10800000 for production - 3 hours)
+    }, 30000);
+}
+
+// ===========================
+// PARALLAX EFFECT
+// ===========================
+
+function initializeParallax() {
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const parallaxElements = document.querySelectorAll('.stars-background');
+
+        parallaxElements.forEach(el => {
+            const speed = 0.5;
+            el.style.transform = `translateY(${scrolled * speed}px)`;
+        });
+    });
 }
 
 // ===========================
@@ -126,20 +136,17 @@ function toggleFaq(button) {
     const faqItem = button.closest('.faq-item');
     const wasActive = faqItem.classList.contains('active');
 
-    // Close all FAQ items
     document.querySelectorAll('.faq-item').forEach(item => {
         item.classList.remove('active');
         const icon = item.querySelector('.faq-icon');
         if (icon) icon.textContent = '▶';
     });
 
-    // Open clicked item if it wasn't active
     if (!wasActive) {
         faqItem.classList.add('active');
         const icon = button.querySelector('.faq-icon');
         if (icon) icon.textContent = '▼';
 
-        // Track which FAQ was opened
         const questionText = button.querySelector('span').textContent;
         trackEvent('FAQ', 'Open', questionText);
     }
@@ -154,12 +161,21 @@ function initializeForm() {
     if (form) {
         form.addEventListener('submit', handleFormSubmit);
 
-        // Track form field interactions
         const formFields = form.querySelectorAll('input, select, textarea');
         formFields.forEach(field => {
             field.addEventListener('blur', function() {
                 if (this.value) {
                     trackEvent('Form', 'Field Completed', this.name);
+                }
+            });
+
+            field.addEventListener('focus', function() {
+                this.parentElement.classList.add('focused');
+            });
+
+            field.addEventListener('blur', function() {
+                if (!this.value) {
+                    this.parentElement.classList.remove('focused');
                 }
             });
         });
@@ -172,13 +188,11 @@ function handleFormSubmit(e) {
     const form = e.target;
     const formData = new FormData(form);
 
-    // Validate form
     if (!form.checkValidity()) {
         form.reportValidity();
         return;
     }
 
-    // Collect form data
     const data = {
         firstName: formData.get('firstName'),
         lastName: formData.get('lastName'),
@@ -194,24 +208,13 @@ function handleFormSubmit(e) {
         timestamp: new Date().toISOString()
     };
 
-    // Track form submission
     trackEvent('Form', 'Submit', 'Founder Application');
 
-    // Here you would normally send to your backend
-    // For now, we'll simulate success
     console.log('Form submitted:', data);
-
-    // Store in localStorage for demo
     localStorage.setItem('founderApplication', JSON.stringify(data));
 
-    // Show success message
     showFormSuccess();
-
-    // Update counter
     updatePlacesRemaining(placesRemaining - 1);
-
-    // Send email notification (in production)
-    // sendEmailNotification(data);
 }
 
 function showFormSuccess() {
@@ -221,45 +224,52 @@ function showFormSuccess() {
     if (form && success) {
         form.style.display = 'none';
         success.style.display = 'block';
-
-        // Scroll to success message
         success.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-        // Confetti effect (optional - can add library)
         createConfetti();
     }
 }
 
 function createConfetti() {
-    // Simple confetti effect
-    const colors = ['#B87333', '#4A69FF', '#10B981', '#F59E0B'];
-    const confettiCount = 50;
+    const colors = ['#F59E0B', '#8B5CF6', '#10B981', '#3B82F6', '#EF4444'];
+    const confettiCount = 60;
 
     for (let i = 0; i < confettiCount; i++) {
-        const confetti = document.createElement('div');
-        confetti.style.position = 'fixed';
-        confetti.style.width = '10px';
-        confetti.style.height = '10px';
-        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-        confetti.style.left = Math.random() * 100 + '%';
-        confetti.style.top = '-10px';
-        confetti.style.opacity = '1';
-        confetti.style.borderRadius = '50%';
-        confetti.style.zIndex = '10000';
-        confetti.style.pointerEvents = 'none';
+        setTimeout(() => {
+            const confetti = document.createElement('div');
+            confetti.style.cssText = `
+                position: fixed;
+                width: ${Math.random() * 10 + 5}px;
+                height: ${Math.random() * 10 + 5}px;
+                background: ${colors[Math.floor(Math.random() * colors.length)]};
+                left: ${Math.random() * 100}vw;
+                top: -20px;
+                opacity: 1;
+                border-radius: 50%;
+                z-index: 10000;
+                pointer-events: none;
+            `;
 
-        document.body.appendChild(confetti);
+            document.body.appendChild(confetti);
 
-        const duration = 2000 + Math.random() * 1000;
-        const endLeft = parseFloat(confetti.style.left) + (Math.random() - 0.5) * 100;
+            const duration = 2500 + Math.random() * 1500;
+            const rotation = Math.random() * 720 - 360;
+            const xMovement = (Math.random() - 0.5) * 200;
 
-        confetti.animate([
-            { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
-            { transform: `translateY(${window.innerHeight}px) rotate(${360 * (Math.random() - 0.5)}deg)`, opacity: 0 }
-        ], {
-            duration: duration,
-            easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-        }).onfinish = () => confetti.remove();
+            confetti.animate([
+                {
+                    transform: `translateY(0) translateX(0) rotate(0deg)`,
+                    opacity: 1
+                },
+                {
+                    transform: `translateY(${window.innerHeight + 100}px) translateX(${xMovement}px) rotate(${rotation}deg)`,
+                    opacity: 0
+                }
+            ], {
+                duration: duration,
+                easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+            }).onfinish = () => confetti.remove();
+        }, i * 30);
     }
 }
 
@@ -268,42 +278,73 @@ function createConfetti() {
 // ===========================
 
 function initializeScrollAnimations() {
-    // Intersection Observer for fade-in animations
     const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -100px 0px'
+        threshold: 0.15,
+        rootMargin: '0px 0px -80px 0px'
     };
 
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
+        entries.forEach((entry, index) => {
             if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
+                setTimeout(() => {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }, index * 100);
+
+                observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
 
-    // Observe cards and sections
     const animatedElements = document.querySelectorAll(
-        '.problem-card, .benefit-card, .testimonial-card, .timeline-step, .faq-item'
+        '.problem-card, .benefit-card, .testimonial-card, .timeline-step, .faq-item, .metric-card, .founder-mini'
     );
 
     animatedElements.forEach(el => {
         el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        el.style.transform = 'translateY(40px)';
+        el.style.transition = 'opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
         observer.observe(el);
     });
 
-    // Track scroll depth
     trackScrollDepth();
+    initializeNavbarScroll();
+}
+
+function initializeNavbarScroll() {
+    const navbar = document.querySelector('.navbar');
+    let lastScroll = 0;
+
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+
+        if (currentScroll > 100) {
+            navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+        } else {
+            navbar.style.boxShadow = '';
+        }
+
+        lastScroll = currentScroll;
+    });
 }
 
 function trackScrollDepth() {
     const depths = [25, 50, 75, 100];
     const tracked = new Set();
 
-    window.addEventListener('scroll', () => {
+    const throttle = (func, delay) => {
+        let timeoutId;
+        return (...args) => {
+            if (!timeoutId) {
+                timeoutId = setTimeout(() => {
+                    func(...args);
+                    timeoutId = null;
+                }, delay);
+            }
+        };
+    };
+
+    const checkScroll = throttle(() => {
         const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
 
         depths.forEach(depth => {
@@ -312,7 +353,9 @@ function trackScrollDepth() {
                 trackEvent('Scroll Depth', `${depth}%`, window.location.pathname);
             }
         });
-    });
+    }, 500);
+
+    window.addEventListener('scroll', checkScroll);
 }
 
 // ===========================
@@ -320,31 +363,32 @@ function trackScrollDepth() {
 // ===========================
 
 function initializeTracking() {
-    // Track page view
     trackPageView();
-
-    // Track time on page
     trackTimeOnPage();
 
-    // Track button clicks
     document.querySelectorAll('.btn').forEach(btn => {
         btn.addEventListener('click', function(e) {
             const text = this.textContent.trim();
             trackEvent('Button Click', 'CTA', text);
         });
     });
+
+    document.querySelectorAll('.benefit-card, .problem-card').forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            const title = this.querySelector('h3')?.textContent;
+            if (title) {
+                trackEvent('Card', 'Hover', title);
+            }
+        });
+    });
 }
 
 function trackPageView() {
     console.log('Page view tracked:', window.location.pathname);
-    // In production: send to Google Analytics
-    // gtag('config', 'GA_MEASUREMENT_ID', { page_path: window.location.pathname });
 }
 
 function trackEvent(category, action, label) {
     console.log('Event tracked:', { category, action, label });
-    // In production: send to Google Analytics
-    // gtag('event', action, { event_category: category, event_label: label });
 }
 
 function trackTimeOnPage() {
@@ -360,42 +404,30 @@ function trackTimeOnPage() {
 // AVATAR CAROUSEL ANIMATION
 // ===========================
 
-// Duplicate avatars for infinite scroll effect
 window.addEventListener('load', () => {
     const avatarsContainer = document.getElementById('avatars-container');
     if (avatarsContainer) {
         const avatars = avatarsContainer.innerHTML;
-        avatarsContainer.innerHTML += avatars; // Duplicate for seamless loop
+        avatarsContainer.innerHTML += avatars;
     }
 });
 
 // ===========================
-// UTILITY FUNCTIONS
+// SMOOTH SCROLL ENHANCEMENTS
 // ===========================
 
-// Debounce function for scroll events
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-// Check if element is in viewport
-function isInViewport(element) {
-    const rect = element.getBoundingClientRect();
-    return (
-        rect.top >= 0 &&
-        rect.left >= 0 &&
-        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-    );
-}
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
 
 // ===========================
 // COOKIE CONSENT (GDPR)
@@ -403,29 +435,70 @@ function isInViewport(element) {
 
 function showCookieConsent() {
     if (!localStorage.getItem('cookieConsent')) {
-        // Create cookie banner
         const banner = document.createElement('div');
-        banner.className = 'cookie-banner';
         banner.innerHTML = `
-            <div class="cookie-content">
-                <p>Nous utilisons des cookies pour améliorer votre expérience. En continuant, vous acceptez notre politique de confidentialité.</p>
-                <div class="cookie-buttons">
-                    <button class="btn btn-primary" onclick="acceptCookies()">Accepter</button>
-                    <button class="btn btn-ghost" onclick="declineCookies()">Refuser</button>
+            <div style="
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: linear-gradient(135deg, #0A0E27 0%, #1E293B 100%);
+                padding: 24px;
+                box-shadow: 0 -8px 32px rgba(0,0,0,0.2);
+                z-index: 9999;
+                border-top: 2px solid rgba(245, 158, 11, 0.3);
+            ">
+                <div style="
+                    max-width: 1200px;
+                    margin: 0 auto;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    gap: 32px;
+                    flex-wrap: wrap;
+                ">
+                    <p style="
+                        color: rgba(255, 255, 255, 0.9);
+                        margin: 0;
+                        font-size: 15px;
+                        flex: 1;
+                    ">
+                        🍪 Nous utilisons des cookies pour améliorer votre expérience. En continuant, vous acceptez notre politique de confidentialité.
+                    </p>
+                    <div style="display: flex; gap: 16px;">
+                        <button
+                            onclick="acceptCookies()"
+                            style="
+                                background: linear-gradient(135deg, #F59E0B 0%, #EF4444 100%);
+                                color: white;
+                                border: none;
+                                padding: 12px 28px;
+                                border-radius: 8px;
+                                font-weight: 600;
+                                cursor: pointer;
+                                font-size: 14px;
+                            "
+                        >
+                            Accepter
+                        </button>
+                        <button
+                            onclick="declineCookies()"
+                            style="
+                                background: transparent;
+                                color: white;
+                                border: 2px solid rgba(255, 255, 255, 0.3);
+                                padding: 12px 28px;
+                                border-radius: 8px;
+                                font-weight: 600;
+                                cursor: pointer;
+                                font-size: 14px;
+                            "
+                        >
+                            Refuser
+                        </button>
+                    </div>
                 </div>
             </div>
-        `;
-
-        // Add styles
-        banner.style.cssText = `
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: white;
-            padding: 20px;
-            box-shadow: 0 -4px 16px rgba(0,0,0,0.1);
-            z-index: 9999;
         `;
 
         document.body.appendChild(banner);
@@ -434,25 +507,23 @@ function showCookieConsent() {
 
 function acceptCookies() {
     localStorage.setItem('cookieConsent', 'accepted');
-    document.querySelector('.cookie-banner')?.remove();
+    document.querySelector('[style*="position: fixed"][style*="bottom: 0"]')?.parentElement.remove();
     trackEvent('GDPR', 'Cookies Accepted', 'Cookie Banner');
 }
 
 function declineCookies() {
     localStorage.setItem('cookieConsent', 'declined');
-    document.querySelector('.cookie-banner')?.remove();
+    document.querySelector('[style*="position: fixed"][style*="bottom: 0"]')?.parentElement.remove();
     trackEvent('GDPR', 'Cookies Declined', 'Cookie Banner');
 }
 
-// Show cookie consent on load
-setTimeout(showCookieConsent, 2000);
+setTimeout(showCookieConsent, 3000);
 
 // ===========================
 // PERFORMANCE MONITORING
 // ===========================
 
 window.addEventListener('load', () => {
-    // Check page load time
     const perfData = window.performance.timing;
     const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
 
@@ -463,6 +534,34 @@ window.addEventListener('load', () => {
     }
 
     trackEvent('Performance', 'Page Load Time', `${pageLoadTime}ms`);
+});
+
+// ===========================
+// INTERACTIVE HOVER EFFECTS
+// ===========================
+
+document.addEventListener('DOMContentLoaded', () => {
+    const cards = document.querySelectorAll('.benefit-card, .problem-card, .testimonial-card');
+
+    cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const rotateX = (y - centerY) / 20;
+            const rotateY = (centerX - x) / 20;
+
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = '';
+        });
+    });
 });
 
 // ===========================
